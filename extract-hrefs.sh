@@ -10,4 +10,5 @@ if [ "a$1" == "a" ]; then
 fi
 
 # Get the easy stuff that's contained in <a href="...">.
+echo "Links in `basename $1`:"
 cat $1 | grep -a '<A href=\"' | sed -E 's/.*<A href=\"([^"]*)\".*/\1 /g' | grep -a -v `basename $1`
