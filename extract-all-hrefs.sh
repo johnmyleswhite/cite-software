@@ -8,10 +8,12 @@ if [ "a$2" == "a" ]; then
 fi
 
 rm -f $2;
+mkdir tmp;
 
-for i in $1/*.pdf do
+for i in $1/*.pdf ; do
   echo $i;
-  pdftohtml --stdout $i > $1/${i/.pdf/.pdftohtml.html};
+  b=`basename $i`;
+  pdftohtml -stdout "$i" > "tmp/${b/.pdf/.html}";
 
-  ./extract-hrefs.sh ${i/.pdf/.pdftohtml.html} >> $2;
+  ./extract-hrefs.sh "tmp/${b/.pdf/.html}" >> $2;
 done
